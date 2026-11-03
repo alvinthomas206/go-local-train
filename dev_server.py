@@ -39,7 +39,9 @@ def client():
         raise RuntimeError(f"NTES Client dependency is incomplete; missing Python module '{exc.name}'.") from exc
     except ImportError as exc:
         raise RuntimeError(f"NTES Client could not be imported: {exc}") from exc
-    return NTESClient(timeout=15, retries=1)
+    # Keep cloud function requests bounded; an NTES connection can stall longer
+    # from serverless IP ranges than it does from a local network.
+    return NTESClient(timeout=8, retries=1)
 
 
 def api_trains(from_code: str, to_code: str) -> dict:

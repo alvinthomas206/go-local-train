@@ -1,4 +1,4 @@
-const CACHE_NAME = 'golocal-shell-v1';
+const CACHE_NAME = 'golocal-shell-v2';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -7,6 +7,7 @@ const APP_SHELL = [
   '/app.js',
   '/manifest.webmanifest',
   '/stations.json',
+  '/icons/golocal-mark.png',
   '/icons/icon-192.png',
   '/icons/icon-512.png'
 ];
