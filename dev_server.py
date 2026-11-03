@@ -33,8 +33,12 @@ TRANSFER_HUBS = (
 def client():
     try:
         from ntes import NTESClient
+    except ModuleNotFoundError as exc:
+        if exc.name == "ntes":
+            raise RuntimeError("NTES Client dependency is missing from this deployment. Install dependencies from requirements.txt or pyproject.toml.") from exc
+        raise RuntimeError(f"NTES Client dependency is incomplete; missing Python module '{exc.name}'.") from exc
     except ImportError as exc:
-        raise RuntimeError("NTES Client is not installed. Run: python -m pip install -r requirements.txt") from exc
+        raise RuntimeError(f"NTES Client could not be imported: {exc}") from exc
     return NTESClient(timeout=15, retries=1)
 
 
